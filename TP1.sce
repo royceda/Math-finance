@@ -53,9 +53,6 @@ p1=[1/9, 1/9, 1/9, 1/9, 1/9, 1/9, 1/9, 1/9, 1/9, 1/9]
 // x=( x_1,....,x_d), p=(p_1,...,p_d)
 //
 function [y] = discrete(x,p)
-    if sum(p) ~= 1 then
-        error('problem');
-    end
     rand('uniform');
     d = length(p);
     pp = [0 p(1:(d-1))];
@@ -70,23 +67,69 @@ endfunction
 
 x = [0,1,2,3,4];
 p = [1/5, 1/5, 1/5, 1/5, 1/5];
-a = discr1(x,p);
+a = discrete(x,p);
 
 
 function [y] = simudsc(n, x, p)
-    if sum(p) ~= 1 then
-        error('problem');
-    end
     for j = 1:n
         y(j) = discrete(x,p); 
     end 
 endfunction
 
 v1 = [-3,-1.5,0,2,2.5];
-p1 = [0.2,0.2,0.2,0.2,0.2];
+p1 = [0.2,0.3,0.1,0.3,0.1];
 
 n = 1000;
-yy = simudsc(n,v1,p1)
+yy = simudsc(n,v1,p1);
 clf();
 histplot(n, yy, style=5);
 legend(["simudsc"])
+
+
+//Exercice 4
+
+a = 9;
+b = 10;
+r = rand(1,1)*(b-a)+a;
+
+function [X] = BM(n)
+    theta = rand(n,1)*2*%pi+0;
+    R = myexp(n,1/2);
+    
+    for i = 1:n
+        X(i) = cos(theta(i))*sqrt(R(i));
+    end
+    
+endfunction
+
+clf();
+n=200000;
+histplot(1000, BM(n), style=2);
+legend(['n=1000000, class=1000'])
+
+
+X = grand(n,1,'nor',3,4);
+//histplot(1000, X, style=4);
+
+
+
+//Exercice 5
+
+function [X,Y]=rejet(n)
+    for i = 1:n
+        u = rand(1,1)*2+1;
+        v = rand(1,1)*2*%pi+1;
+        r = u**2 + v**2;
+        if r >1 then
+            rejet(n);
+        end
+    
+        z = sqrt((-2*log(n))/r);
+        x = u*z;
+        y = v*z;
+        
+        X(i) = x;
+        Y(i) = y;
+    end
+    
+endfunction
