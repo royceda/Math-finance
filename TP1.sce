@@ -103,9 +103,9 @@ function [X] = BM(n)
 endfunction
 
 clf();
-n=300000;
-histplot(1000, BM(n), style=2);
-legend(['n=300 000, class=1000'])
+n=200000;
+//histplot(1000, BM(n), style=2);
+//legend(['n=1000000, class=1000'])
 
 
 //X = grand(n,1,'nor',3,4);
@@ -115,21 +115,33 @@ legend(['n=300 000, class=1000'])
 
 //Exercice 5
 
-function [X,Y]=rejet(n)
-    for i = 1:n
+function [X, Y, r]=rejet1()
+    
         u = rand(1,1)*2+1;
-        v = rand(1,1)*2*%pi+1;
+        v = rand(1,1)*2+1;
         r = u**2 + v**2;
+        
+        r = (rand(1,1)*2-1)**2 + (rand(1,1)*2-1)**2
         if r >1 then
-            rejet(n);
+            rejet1();
         end
     
         z = sqrt((-2*log(n))/r);
         x = u*z;
         y = v*z;
         
-        X(i) = x;
-        Y(i) = y;
-    end
-    
+        X = x;
+        Y = y;
+        print(%io(2),X,Y,r);
+        return [X,Y,r]
 endfunction
+
+
+function [X, Y]=rejet(n)
+    for i=1:n
+        V = rejet1();
+        X(i) = V(1);
+        Y(i) = V(2);
+    end
+endfunction
+
