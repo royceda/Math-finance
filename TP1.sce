@@ -103,11 +103,14 @@ function [X] = BM(n)
 endfunction
 
 clf();
-n=200000;
-//histplot(1000, BM(n), style=2);
-//legend(['n=1000000, class=1000'])
+n=100000;
+histplot(1000, BM(n), style=2);
+legend(['n=500000, class=1000'])
 
+x=[-5:0.1:5]
+plot2d(x,1/(4*sqrt(2*%pi))*exp(-(x-3)**2/2*4**2), style=5)
 
+plot2d(x,1/(2*sqrt(2*%pi))*exp(-x**2/4), style=4)
 //X = grand(n,1,'nor',3,4);
 //histplot(1000, X, style=4);
 
@@ -150,6 +153,6 @@ function [p]=rejet(n)
     end
 endfunction
 
-n = 10000;
-histplot(10000, rejet(n), style=2);
-legend(['n=100000, class=1000'])
+n = 100000;
+//histplot(1000, rejet(n), style=2);
+//legend(['n=100000, class=1000'])
