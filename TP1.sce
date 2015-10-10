@@ -120,22 +120,25 @@ function [vect]=rejet1()
         u = rand(1,1)*2-1;
         v = rand(1,1)*2-1;
         r = u**2 + v**2;
-        
-        if r >1 then
-            rejet1();
+        if r>1 then
+            vect = rejet1();
         end
-    
-        z = sqrt((-2*log(r))/r);
-        x = u*z;
-        y = v*z;
         
-        X = x;
-        Y = y;
-        //print(%io(2),X,Y,r);
+        if r>1 then
+            rejet1();
+        else
+            z = sqrt((-2*log(r))/r);
+            x = u*z;
+            y = v*z;
         
-        vect(1) = X
-        vect(2) = Y
-        vect(3) = r
+            X = x;
+            Y = y;
+            //print(%io(2),X,Y,r);
+        
+            vect(1) = X
+            vect(2) = Y
+            vect(3) = r
+        end
 endfunction
 
 
@@ -147,6 +150,6 @@ function [p]=rejet(n)
     end
 endfunction
 
-n = 100;
-histplot(1000, rejet(n), style=2);
-legend(['n=100, class=1000'])
+n = 10000;
+histplot(10000, rejet(n), style=2);
+legend(['n=100000, class=1000'])
