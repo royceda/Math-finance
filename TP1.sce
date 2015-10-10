@@ -103,12 +103,12 @@ function [X] = BM(n)
 endfunction
 
 clf();
-n=200000;
+n=300000;
 histplot(1000, BM(n), style=2);
-legend(['n=1000000, class=1000'])
+legend(['n=300 000, class=1000'])
 
 
-X = grand(n,1,'nor',3,4);
+//X = grand(n,1,'nor',3,4);
 //histplot(1000, X, style=4);
 
 
