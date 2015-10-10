@@ -115,33 +115,38 @@ n=200000;
 
 //Exercice 5
 
-function [X, Y, r]=rejet1()
+function [vect]=rejet1()
     
-        u = rand(1,1)*2+1;
-        v = rand(1,1)*2+1;
+        u = rand(1,1)*2-1;
+        v = rand(1,1)*2-1;
         r = u**2 + v**2;
         
-        r = (rand(1,1)*2-1)**2 + (rand(1,1)*2-1)**2
         if r >1 then
             rejet1();
         end
     
-        z = sqrt((-2*log(n))/r);
+        z = sqrt((-2*log(r))/r);
         x = u*z;
         y = v*z;
         
         X = x;
         Y = y;
-        print(%io(2),X,Y,r);
-        return [X,Y,r]
+        //print(%io(2),X,Y,r);
+        
+        vect(1) = X
+        vect(2) = Y
+        vect(3) = r
 endfunction
 
 
-function [X, Y]=rejet(n)
+function [p]=rejet(n)
     for i=1:n
         V = rejet1();
-        X(i) = V(1);
-        Y(i) = V(2);
+        p(1)(i) = V(1);
+        p(2)(i) = V(2);
     end
 endfunction
 
+n = 100;
+histplot(1000, rejet(n), style=2);
+legend(['n=100, class=1000'])
