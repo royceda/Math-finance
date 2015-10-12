@@ -82,8 +82,8 @@ p1 = [0.2,0.3,0.1,0.3,0.1];
 n = 1000;
 yy = simudsc(n,v1,p1);
 clf();
-histplot(n, yy, style=5);
-legend(["simudsc"])
+histplot(100, yy, style=5);
+legend(["simudsc n=1000"])
 
 
 //Exercice 4
@@ -102,15 +102,15 @@ function [X] = BM(n)
     
 endfunction
 
-clf();
+//clf();
 n=100000;
-histplot(1000, BM(n), style=2);
-legend(['n=500000, class=1000'])
+//histplot(1000, BM(n), style=2);
+//legend(['n=500000, class=1000'])
 
 x=[-5:0.1:5]
-plot2d(x,1/(4*sqrt(2*%pi))*exp(-(x-3)**2/2*4**2), style=5)
+//plot2d(x,1/(4*sqrt(2*%pi))*exp(-(x-3)**2/2*4**2), style=1)
 
-plot2d(x,1/(2*sqrt(2*%pi))*exp(-x**2/4), style=4)
+//plot2d(x,1/(2*sqrt(2*%pi))*exp(-x**2/4), style=1)
 //X = grand(n,1,'nor',3,4);
 //histplot(1000, X, style=4);
 
