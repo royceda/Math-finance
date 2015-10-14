@@ -156,3 +156,49 @@ endfunction
 n = 100000;
 //histplot(1000, rejet(n), style=2);
 //legend(['n=100000, class=1000'])
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//Exercice 1
+
+n = 10;
+p0 = 1/2;
+p1 = 1/2; 
+
+D = grand(1,1,'bin',n, p0);
+G = grand(1,1,'bin',n,p1)
+
+P = D-G;
+Pa = D+G
+
+function [P]=A(n)
+    D = grand(1,1,'bin',n, 0.5);
+    G = grand(1,1,'bin',n,0.5);
+    P = D-G;
+endfunction
+
+
+
+function [p] = B(n)
+    p(1) = 0;
+    for i=2:n
+        p(i) = p(i-1) + A(1)
+    end
+endfunction
+
+clf();
+x=[0:100]
+plot(x, B(101))
