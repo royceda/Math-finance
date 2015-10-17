@@ -14,18 +14,21 @@ legend(["1000"])
 n = 10000;
 yy = rand(n,1);
 //green
+clf();
 histplot(class, yy, style=5);
 legend(["10000"])
 
 n = 100000;
 zz = rand(n,1);
 //grey
+clf();
 histplot(class, zz, style=3);
 legend(["100000"])
 
 n = 1000000;
 aa = rand(n,1);
 //blue
+clf();
 histplot(class, aa, style=2);
 legend(["1000000"])
 
@@ -33,10 +36,10 @@ legend(["1000000"])
 //Exercice 2
 
 deff('[p]=myexp(n, a)', 'p=-1/a*log(rand(n,1))');
-clf();
 n=1000000;
+x=[0:0.1:4];
+clf();
 histplot(1000, myexp(n,2), style=2);
-x=[0:0.1:4]
 plot2d(x,2*exp(-2*x), style=5);
 legend(["n = 1000000, class = 1000"])
 
@@ -81,9 +84,9 @@ p1 = [0.2,0.3,0.1,0.3,0.1];
 
 n = 1000;
 yy = simudsc(n,v1,p1);
-clf();
-histplot(100, yy, style=5);
-legend(["simudsc n=1000"])
+//clf();
+//histplot(100, yy, style=5);
+//legend(["simudsc n=1000"])
 
 
 //Exercice 4
