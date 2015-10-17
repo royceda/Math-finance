@@ -42,4 +42,43 @@ endfunction
 
 clf();
 x=[0:1000]
-plot(x, brown(10000,1001))
+plot(x, brown(100000,1001))
+
+
+
+//Exercice 2
+
+n = 10 000
+
+function [p] = BS(u, o)
+    t = [0, 0.01, 1];
+    k = 10000;
+    N = 14;
+    for i in 1:lenght(t)
+        exp(u*t - o**2/2*t + o*brown(k, N))
+    end
+endfunction
+
+
+function [p] = simuBS()
+    mhu = [0, 0.01, 0.05, 0.1, 0.2, 0.5];
+    for i in 1:6
+        u = mhu(i);
+        exp(mhu*t)
+    end
+    
+endfunction
+
+//Cas 1
+
+
+rho = 0.1;
+mhu = 0.0;
+
+
+
+
+
+
+
+//Cas 2
