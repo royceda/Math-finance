@@ -84,9 +84,9 @@ p1 = [0.2,0.3,0.1,0.3,0.1];
 
 n = 1000;
 yy = simudsc(n,v1,p1);
-//clf();
-//histplot(100, yy, style=5);
-//legend(["simudsc n=1000"])
+clf();
+histplot(100, yy, style=5);
+legend(["simudsc n=1000"])
 
 
 //Exercice 4
@@ -156,7 +156,8 @@ function [p]=rejet(n)
     end
 endfunction
 
-n = 100000;
-//histplot(1000, rejet(n), style=2);
-//legend(['n=100000, class=1000'])
+n = 1000000;
+clf();
+histplot(1000, rejet(n), style=2);
+legend(['n=100000, class=1000'])
 

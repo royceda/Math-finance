@@ -28,10 +28,18 @@ endfunction
 clf();
 x=[0:10000]
 plot(x, B(10001))
+legend(["Marche aleatoire n = 10 000"])
 
 
-function [p]=brow(k,n)
+function [p]=brown(k,n)
+    V = B(k);
     for i=1:n  
-        p(i) = B(i)/sqrt(N);
+        p(i) = V(i)/sqrt(n);
     end
 endfunction
+
+ brown(100000,100)
+
+clf();
+x=[0:1000]
+plot(x, brown(10000,1001))
