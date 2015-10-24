@@ -7,7 +7,7 @@
 </ul>
 
 
-2. Mouvement Brownien et Modèle de Black Scholes
+2. TP2: Mouvement Brownien et Modèle de Black Scholes
 <ul>
 <li>Marches aléatoires et trajectoires Browniennes</li>
 <li>Modèle de Black et Scholes</li>
