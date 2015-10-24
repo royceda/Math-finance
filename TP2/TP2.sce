@@ -26,33 +26,43 @@ endfunction
 
 clf();
 x=[0:100]
-//for i=1:10
     plot(x, RandWalk(101), 'r-');
     plot(x, RandWalk(101), 'b-');
     plot(x, RandWalk(101), 'k-');
     plot(x, RandWalk(101), 'm-');
     plot(x, RandWalk(101), 'g-');
-//end
-
-
 legend(["Marches aleatoires n = 100"])
 
 
 function [p]=brown(k,n)
-    V = B(k);
+    V = RandWalk(k);
     for i=1:n  
         p(i) = V(i)/sqrt(n);
     end
 endfunction
 
- brown(100000,100)
+ B = brown(100000,100)
+
+//clf();
+//x=[0:100]
+//plot(x, brown(100001,101),'m-')
+//legend(["100"])
 
 //clf();
 //x=[0:1000]
-//plot(x, brown(100000,1001))
+//plot(x, brown(100001,1001),'m-')
+//legend(["1000"])
+
+//clf();
+//x=[0:10000]
+//plot(x, brown(100001,10001),'m-')
+//legend(["10 000"])
 
 
-
+clf();
+x=[0:100000]
+plot(x, brown(100001,100001),'m-')
+legend(["100 000"])
 
 
 
