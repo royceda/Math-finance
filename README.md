@@ -6,3 +6,4 @@
 
 2. Mouvement Brownien et Modèle de Black Scholes
 ..*Marches aléatoires et trajectoires Browniennes
+⋅⋅* Unordered sub-list.
