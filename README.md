@@ -8,5 +8,9 @@
 
 
 2. Mouvement Brownien et Modèle de Black Scholes
-+ Marches aléatoires et trajectoires Browniennes
-+ Unordered sub-list.
+<ul>
+<li>Marches aléatoires et trajectoires Browniennes</li>
+<li>Modèle de Black et Scholes</li>
+</ul>
+
+
