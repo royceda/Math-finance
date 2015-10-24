@@ -1,8 +1,11 @@
 # Math-finance
 1. TP1 : Simulation de Variable aléatoire
-- Test du générateur aléatoire
-- Simulation d'une loi exponentielle
-- simulation d'une loi normale
+<ul>
+<li>Test du générateur aléatoire</li>
+<li>Simulation d'une loi exponentielle</li>
+<li>Simulation d'une loi normale</li>
+</ul>
+
 
 2. Mouvement Brownien et Modèle de Black Scholes
 + Marches aléatoires et trajectoires Browniennes
