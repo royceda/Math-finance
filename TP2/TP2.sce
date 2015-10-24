@@ -59,46 +59,142 @@ endfunction
 //legend(["10 000"])
 
 
-clf();
-x=[0:100000]
-plot(x, brown(100001,100001),'m-')
-legend(["100 000"])
+//clf();
+//x=[0:100000]
+//plot(x, brown(100001,100001),'m-')
+//legend(["100 000"])
 
 
 
 //Exercice 2
 
-n = 10 000
 
-function [p] = BS(u, o)
-    t = [0, 0.01, 1];
-    k = 10000;
-    N = 14;
-    for i in 1:lenght(t)
-        exp(u*t - o**2/2*t + o*brown(k, N))
+function [p] = BS(sigma, mu, b)
+    t = [0: 0.001: 1];
+    for i=1:length(t)
+        p(i) = exp(mu*t(i) - rho**2*t(i)/2 + sigma*b(i));
     end
 endfunction
 
 
 function [p] = simuBS()
-    mhu = [0, 0.01, 0.05, 0.1, 0.2, 0.5];
-    for i in 1:6
-        u = mhu(i);
-        exp(mhu*t)
+    k = 10000;
+    N = 10000;
+    b = brown(k, N);
+    rho = 0.1;
+    mu = [0, 0.01, 0.05, 0.1, 0.2, 0.5];
+    for i =1:6
+        p(i) = BS(rho, mu(i), b(i));
     end
     
 endfunction
 
 //Cas 1
 
-
-rho = 0.1;
-mhu = 0.0;
-
-
-
-
+k = 10000;
+N = 10000;
+b = brown(k, N);
+sigma = 0.1;
+mu = [0, 0.01, 0.05, 0.1, 0.2, 0.5]
 
 
+//Variation de la dérive
+//clf();
+//x= [0: 0.001: 1];
+//plot(x, BS(0.1, 0, b),'c-')
+//plot(x, BS(0.1, 0.01, b),'g-')
+//plot(x, BS(0.1, 0.05, b),'b-')
+//plot(x, BS(0.1, 0.1, b),'r-')
+//plot(x, BS(0.1, 0.2, b),'k-')
+//plot(x, BS(0.1, 0.5, b),'m-')
+//legend(["0%"; "1%"; "5%";"10%"; "20%"; "50%"]);
 
-//Cas 2
+
+
+
+
+//Variation de la volatilité
+//clf();
+//x= [0: 0.001: 1];
+//plot(x, BS(0.01, 0.2, b),'c-')
+//plot(x, BS(0.02, 0.2, b),'g-')
+//plot(x, BS(0.05, 0.2, b),'b-')
+//plot(x, BS(0.1 ,0.2, b),'r-')
+//plot(x, BS(0.15, 0.2, b),'k-')
+//plot(x, BS(0.2, 0.2, b),'m-')
+//legend(["1%"; "2%"; "5%";"10%"; "15%"; "20%"]);
+
+
+
+
+//Exercice 4
+
+function [p] = d1(t,x,K,T,r,sigma)
+    p = log(x/K)+(r+sigma**2/2)*(T-t)/(sigma*sqrt(T-t))
+endfunction
+
+test = d1(10,100,100,30,0.05,0.1)
+
+function [p] = d2(t,x,K,T,r,sigma)
+    p =  d1(t,x,K,T,r,sigma) - sigma*sqrt(T-t)
+endfunction
+
+test = d2(10,100,100,30,0.05,0.1)
+
+function [p] = Call(x, t, T, K, r, sigma)
+    first = x*cdfnor("PQ",d1(t,x,K,T,r,sigma),0,1);
+    second = K*exp(-r*(T-t))*cdfnor("PQ",d2(t,x,K,T,r,sigma),0,1);
+    p = first - second;
+endfunction
+
+
+
+clf();
+x= [0.01: 0.001: 100];
+function [p] = test1(x)
+    for i = 1:length(x)
+        p(i) = Call(x(i),10,30,100,0.05,0.1);
+    end 
+endfunction
+
+
+//plot(x, test1(x),'m-')
+
+
+
+clf();
+x= [0:0.1:29.99];
+function [p] = test2(x)
+    for i = 1:length(x)
+        p(i) = Call(100, x(i),30,100,0.05,0.1);
+    end 
+endfunction
+
+//plot(x, test2(x),'m-')
+
+
+
+clf();
+x= [0:0.0001:0.2];
+function [p] = test3(x)
+    for i = 1:length(x)
+        p(i) = Call(100, 10,30,100,x(i),0.1);
+    end 
+endfunction
+
+//plot(x, test3(x),'m-')
+
+
+
+clf();
+x= [0.1:0.00001:0.25];
+function [p] = test4(x)
+    for i = 1:length(x)
+        p(i) = Call(100, 10,30,100,0.5,x(i));
+    end 
+endfunction
+
+plot(x, test4(x),'m-')
+
+
+
