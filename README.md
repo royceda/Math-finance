@@ -11,7 +11,7 @@
 <ul>
 <li>Marches aléatoires et trajectoires Browniennes</li>
 <li>Modèle de Black et Scholes</li>
-<li>Etude d'un call d'une option europeen</li>
+<li>Evaluation d'une option européenne</li>
 </ul>
 
 
