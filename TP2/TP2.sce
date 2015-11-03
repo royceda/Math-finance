@@ -129,26 +129,28 @@ mu = [0, 0.01, 0.05, 0.1, 0.2, 0.5]
 
 //Exercice 4
 
-function [p] = d1(t,x,K,T,r,sigma)
-    p = log(x/K)+(r+sigma**2/2)*(T-t)/(sigma*sqrt(T-t))
+//Call
+function [p] = d1(x,t,K,T,r,sigma)
+    a = log(x/K)+(r+sigma**2/2)*(T-t)
+    p = a /(sigma*sqrt(T-t))
 endfunction
 
 test = d1(10,100,100,30,0.05,0.1)
 
-function [p] = d2(t,x,K,T,r,sigma)
-    p =  d1(t,x,K,T,r,sigma) - sigma*sqrt(T-t)
+function [p] = d2(x,t,K,T,r,sigma)
+    p =  d1(x,t,K,T,r,sigma) - sigma*sqrt(T-t)
 endfunction
 
 test = d2(10,100,100,30,0.05,0.1)
 
 function [p] = Call(x, t, T, K, r, sigma)
-    first = x*cdfnor("PQ",d1(t,x,K,T,r,sigma),0,1);
-    second = K*exp(-r*(T-t))*cdfnor("PQ",d2(t,x,K,T,r,sigma),0,1);
+    first = x*cdfnor("PQ",d1(x,t,K,T,r,sigma),0,1);
+    second = K*exp(-r*(T-t))*cdfnor("PQ",d2(x,t,K,T,r,sigma),0,1);
     p = first - second;
 endfunction
 
 
-
+//Strike price
 clf();
 x= [0.01: 0.001: 100];
 function [p] = test1(x)
@@ -157,12 +159,10 @@ function [p] = test1(x)
     end 
 endfunction
 
-
-//plot(x, test1(x),'m-')
-
+plot(x, test1(x),'m-')
 
 
-clf();
+//Temps avant echeance
 x= [0:0.1:29.99];
 function [p] = test2(x)
     for i = 1:length(x)
@@ -173,8 +173,7 @@ endfunction
 //plot(x, test2(x),'m-')
 
 
-
-clf();
+//taux interet
 x= [0:0.0001:0.2];
 function [p] = test3(x)
     for i = 1:length(x)
@@ -185,16 +184,76 @@ endfunction
 //plot(x, test3(x),'m-')
 
 
-
-clf();
-x= [0.1:0.00001:0.25];
+//volatilité
+x= [0.01:0.0001:0.25];
 function [p] = test4(x)
-    for i = 1:length(x)
-        p(i) = Call(100, 10,30,100,0.5,x(i));
+    for i = 1:length(x);
+        p(i) = Call(100,10,30,100,0.05,x(i));
     end 
 endfunction
 
-plot(x, test4(x),'m-')
+//plot(x, test4(x),'m-')
+
+
+
+
+
+//Put
+
+function [p] = Put(x, t, T, K, r, sigma)
+    first = x*cdfnor("PQ",-d1(x,t,K,T,r,sigma),0,1);
+    second = K*exp(-r*(T-t))*cdfnor("PQ",-d2(x,t,K,T,r,sigma),0,1);
+    p = -first + second;
+endfunction
+
+
+
+
+//clf();
+x= [0.01: 0.001: 100];
+function [p] = test1(x)
+    for i = 1:length(x)
+        p(i) = Put(x(i),10,30,100,0.05,0.1);
+    end 
+endfunction
+
+
+//plot(x, test1(x),'m-')
+
+
+
+x= [0:0.01:29.999];
+function [p] = test2(x)
+    for i = 1:length(x)
+        p(i) = Put(100, x(i),30,100,0.05,0.1);
+    end 
+endfunction
+
+//plot(x, test2(x),'m-')
+
+
+
+
+x= [0:0.0001:0.2];
+function [p] = test3(x)
+    for i = 1:length(x)
+        p(i) = Put(100, 10,30,100,x(i),0.1);
+    end 
+endfunction
+
+//plot(x, test3(x),'m-')
+
+
+
+x= [0.1:0.001:0.9];
+function [p] = test4(x)
+    for i = 1:length(x)
+        p(i) = Put(100, 10,30,100,0.05,x(i));
+    end 
+endfunction
+
+//plot(x, test4(x),'r-')
+
 
 
 
