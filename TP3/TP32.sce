@@ -32,11 +32,13 @@ T = 100;
 K = 1000;
 r = 0.005;
 sigma = 0.1;
+t=0;
 
 n = 1000;
 X = grand(n,1,'nor',0,1);
 
-function [p] = g(X, x, t, T, K, r, sigma)
+//For a Call
+function [p] = gc(X, x, t, T, K, r, sigma)
     first = K*exp(-r*(T-t));
     second = x*exp(sigma*X*sqrt(T-t)) *exp(-((T-t)*sigma**2)/2)
     p = max(0, -first + second);
@@ -45,11 +47,11 @@ endfunction
 
 test = g(X(1), x, t, T, K, r, sigma);
 
-//evaluation with Monte Carlo method
+//evaluation of Call with Monte Carlo method
 function [p] = eval_Call(X, x, t, T, K, r, sigma, n)
     tmp = 0;
     for i = 1:n
-        tmp = tmp + g(X(i), x, t, T, K, r, sigma)/n;
+        tmp = tmp + gc(X(i), x, t, T, K, r, sigma)/n;
     end
     p = tmp
 endfunction
@@ -59,7 +61,7 @@ function [p]= error_Rate(X, x, t, T, K, r, sigma, n)
     tmp = 0;
     I = eval_Call(X, x, t, T, K, r, sigma, n);
     for i = 1:n
-        tmp = tmp + (g(X(i), x, t, T, K, r) - I)**2/(n-1);
+        tmp = tmp + (gc(X(i), x, t, T, K, r) - I)**2/(n-1);
     end
     p = tmp;
 endfunction
@@ -109,12 +111,12 @@ endfunction
 n = 10000
 y = [10:100:n];
 X = grand(n,1,'nor',0,1);
-clf();
+//clf();
 //plot2d(y, test1(X, x, t, T, K, r, sigma, y), logflag = 'ln', style=5);
 //plot2d(y, test2(X, x, t, T, K, r, sigma, y), logflag = 'ln', style=4);
 //plot2d(y, test3(X, x, t, T, K, r, sigma, y, n), logflag = 'ln', style=2);
 //plot2d(y, test4(X, x, t, T, K, r, sigma, y, n), logflag = 'ln', style=2);
-
+//legend(["Call par Monte Carlo";"Call exacte";"inte"])
 
 
 

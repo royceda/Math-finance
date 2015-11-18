@@ -111,15 +111,15 @@ function [p] = test4(X, x, t, T, K, r, sigma, y, n)
 endfunction
 
 
-n = 10000
-y = [10:100:n];
+n = 1000000
+y = [1:100000:n];
 X = grand(n,1,'nor',0,1);
 clf();
-//plot2d(y, test1(X, x, t, T, K, r, sigma, y), logflag = 'ln', style=5);
-//plot2d(y, test2(X, x, t, T, K, r, sigma, y), logflag = 'ln', style=4);
-//plot2d(y, test3(X, x, t, T, K, r, sigma, y, n), logflag = 'ln', style=2);
-//plot2d(y, test4(X, x, t, T, K, r, sigma, y, n), logflag = 'ln', style=2);
-
+plot2d(y, test1(X, x, t, T, K, r, sigma, y), logflag = 'ln', style=5);
+plot2d(y, test2(X, x, t, T, K, r, sigma, y), logflag = 'ln', style=4);
+plot2d(y, test3(X, x, t, T, K, r, sigma, y, n), logflag = 'ln', style=2);
+plot2d(y, test4(X, x, t, T, K, r, sigma, y, n), logflag = 'ln', style=2);
+legend(["Put par Monte Carlo";"Put exacte";"inte"])
 
 
 

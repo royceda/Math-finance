@@ -1,6 +1,6 @@
 //Exercice 3
 
-
+t = 0;
 x = 1000;
 T = 100;
 K = 1000;
@@ -10,7 +10,7 @@ n = 10000
 y = [10:100:n];
 X = grand(n,1,'nor',0,1);
 
-
+//We use the previous Call compute with Monte Carlo
 function [p] = eval_PutVC(X, x, t, T, K, r, sigma, n)
     I = x*(1-exp(-r*T));
     p = I - eval_Call(X, x, t, T, K, r, sigma, n)
@@ -69,11 +69,13 @@ function [p] = test4(X, x, t, T, K, r, sigma, y, n)
 endfunction
 
 
-n = 10000
-y = [10:100:n];
+n = 1000
+y = [1:10:n];
 X = grand(n,1,'nor',0,1);
 clf();
-//plot2d(y, test1(X, x, t, T, K, r, sigma, y), logflag = 'ln', style=5);
-//plot2d(y, test2(X, x, t, T, K, r, sigma, y), logflag = 'ln', style=4);
-//plot2d(y, test3(X, x, t, T, K, r, sigma, y, n), logflag = 'ln', style=2);
-//plot2d(y, test4(X, x, t, T, K, r, sigma, y, n), logflag = 'ln', style=2);
+plot2d(y, test1(X, x, t, T, K, r, sigma, y), logflag = 'ln', style=5);
+plot2d(y, test2(X, x, t, T, K, r, sigma, y), logflag = 'ln', style=4);
+plot2d(y, test3(X, x, t, T, K, r, sigma, y, n), logflag = 'ln', style=2);
+plot2d(y, test4(X, x, t, T, K, r, sigma, y, n), logflag = 'ln', style=2);
+legend(["Put par Monte Carlo";"Put exacte";"inte"])
+
